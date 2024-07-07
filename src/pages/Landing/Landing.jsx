@@ -13,7 +13,8 @@ const Landing = () => {
   const [longUrl, setLongUrl] = useState(null);
 
   const navigate = useNavigate();
-  const handleShorten = () => {
+  const handleShorten = (e) => {
+    e.preventDefault();
     if (longUrl) {
       navigate(`/auth?createNew=${longUrl}`);
     }
