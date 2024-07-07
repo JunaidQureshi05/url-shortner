@@ -1,5 +1,5 @@
 function App() {
-  return <div>Junaid </div>;
+  return <div className="text-2xl">Junaid </div>;
 }
 
 export default App;
