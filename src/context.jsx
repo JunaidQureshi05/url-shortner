@@ -1,8 +1,7 @@
 import { getCurrentUser } from "./db/apiAuth";
 import useFetch from "./hooks/useFetch";
 
-const { createContext, useEffect, useContext } = require("react");
-
+import { createContext, useEffect, useContext } from "react";
 const UrlContext = createContext();
 
 const UrlProvider = ({ children }) => {
