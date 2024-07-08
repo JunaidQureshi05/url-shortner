@@ -34,10 +34,9 @@ const Login = () => {
 
   const handleLogin = async () => {
     setErrors([]);
-    // call your login API here
-    // if successful, navigate to home page
-    // if not successful, set errors
     try {
+      console.log("formData is ", formData);
+      debugger;
       const schema = Yup.object().shape({
         email: Yup.string()
           .email("Invalid email")
@@ -46,13 +45,16 @@ const Login = () => {
           .min(6, "Password must be at least 6 characters")
           .required("Password is required"),
       });
+
       await schema.validate(formData, { abortEarly: false });
       await fnLogin();
     } catch (e) {
       const newErrors = {};
-      e.inner.forEach((error) => {
-        newErrors[error.path] = error.message;
+
+      e?.inner?.forEach((err) => {
+        newErrors[err.path] = err.message;
       });
+
       setErrors(newErrors);
     }
   };
@@ -96,12 +98,8 @@ const Login = () => {
         </div>
       </CardContent>
       <CardFooter>
-        <Button onClick={fnLogin}>
-          {loading ? (
-            <BeatLoader size={10} color="#36d7b7" onClick={handleLogin} />
-          ) : (
-            "Login"
-          )}
+        <Button onClick={handleLogin}>
+          {loading ? <BeatLoader size={10} color="#36d7b7" /> : "Login"}
         </Button>
       </CardFooter>
     </Card>
