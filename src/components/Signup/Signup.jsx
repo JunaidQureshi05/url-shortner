@@ -54,7 +54,6 @@ const Signup = () => {
       await fnSignup();
     } catch (e) {
       const newErrors = {};
-
       e.inner.forEach((error) => {
         console.log("error: " + error.message);
         newErrors[error.path] = error.message;

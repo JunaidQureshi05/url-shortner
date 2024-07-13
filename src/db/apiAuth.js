@@ -15,9 +15,10 @@ export async function login({ email, password }) {
 
 export async function getCurrentUser() {
   const { data: session, error } = await supabase.auth.getSession();
+  console.log(">>>>>>>>>>>>>>", session, error);
   if (!session.session) return null;
   if (error) throw new Error(error.message);
-  return session.session;
+  return session.session?.user;
 }
 
 export async function signup({ name, email, password, profile_pic }) {

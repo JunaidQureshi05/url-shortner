@@ -11,6 +11,7 @@ const UrlProvider = ({ children }) => {
     error,
     fn: fetchUser,
   } = useFetch(getCurrentUser);
+  console.log("@@@@@@Junaid", user);
   const isAuthenticated = user?.role === "authenticated";
 
   useEffect(() => {
