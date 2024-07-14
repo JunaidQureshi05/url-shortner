@@ -22,7 +22,6 @@ const Auth = () => {
   const longLink = searchParams.get("createNew");
   const navigate = useNavigate();
   useEffect(() => {
-    console.log(isAuthenticated, loading);
     if (isAuthenticated && !loading) {
       navigate(`/dashboard?${longLink ? `createNew=${longLink}` : ""}}`);
     }

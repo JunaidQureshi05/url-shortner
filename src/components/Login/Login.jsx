@@ -35,8 +35,6 @@ const Login = () => {
   const handleLogin = async () => {
     setErrors([]);
     try {
-      console.log("formData is ", formData);
-      debugger;
       const schema = Yup.object().shape({
         email: Yup.string()
           .email("Invalid email")
@@ -60,14 +58,11 @@ const Login = () => {
   };
 
   useEffect(() => {
-    console.log(data);
     if (error === null && data) {
       navigate(`/dashboard?${longLink ? `createNew=${longLink}` : ""}`);
       fetchUser();
     }
   }, [data, error]);
-
-  console.log("Error is #############", error?.message);
   return (
     <Card>
       <CardHeader>

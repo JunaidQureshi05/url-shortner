@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/accordion";
 import { useNavigate } from "react-router-dom";
 
-const Landing = () => {
+export const Landing = () => {
   const [longUrl, setLongUrl] = useState(null);
 
   const navigate = useNavigate();
@@ -76,5 +76,3 @@ const Landing = () => {
     </div>
   );
 };
-
-export default Landing;

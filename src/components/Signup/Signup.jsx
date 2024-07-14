@@ -49,28 +49,23 @@ const Signup = () => {
           .required("Password is required"),
         profile_pic: Yup.mixed().required("Profile picture is required"),
       });
-      debugger;
+
       await schema.validate(formData, { abortEarly: false });
       await fnSignup();
     } catch (e) {
       const newErrors = {};
       e.inner.forEach((error) => {
-        console.log("error: " + error.message);
         newErrors[error.path] = error.message;
       });
       setErrors(newErrors);
     }
   };
-  console.log("@@@@@@@@", errors);
   useEffect(() => {
-    console.log(data);
     if (error === null && data) {
       navigate(`/dashboard?${longLink ? `createNew=${longLink}` : ""}`);
       fetchUser();
     }
   }, [data, error]);
-
-  console.log("Error is #############", error?.message);
   return (
     <Card>
       <CardHeader>
