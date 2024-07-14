@@ -1,4 +1,4 @@
-import supabase from "./supabase";
+import supabase, { supabaseUrl } from "./supabase";
 
 export async function getUrls(user_id) {
   const { data, error } = await supabase
@@ -9,7 +9,6 @@ export async function getUrls(user_id) {
     console.error(error?.message);
     throw new Error("Unable to load urls");
   }
-
   return data;
 }
 
@@ -42,7 +41,7 @@ export async function createUrl(
 
   if (storageError) throw new Error(storageError.message);
 
-  const qr_code = `${supabaseUrl}/storage/v1/object/public/qrs/${fileName}`;
+  const qr = `${supabaseUrl}/storage/v1/object/public/qrs/${fileName}`;
 
   const { data, error } = await supabase
     .from("urls")
@@ -53,7 +52,7 @@ export async function createUrl(
         original_url: longUrl,
         custom_url: customUrl || null,
         short_url,
-        qr_code,
+        qr_code: qr,
       },
     ])
     .select();

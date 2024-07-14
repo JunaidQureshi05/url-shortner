@@ -13,6 +13,7 @@ const useFetch = (cb, options = {}) => {
       setData(response);
       setError(null);
     } catch (error) {
+      debugger;
       setError(error);
     } finally {
       setLoading(false);
