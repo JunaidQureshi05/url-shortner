@@ -5,27 +5,9 @@ import { Button } from "../ui/button";
 import { deleteUrl } from "@/db/apiUrls";
 import { BeatLoader } from "react-spinners";
 import useFetch from "@/hooks/useFetch";
+import { downloadImage } from "@/utils/helpers";
 
 const LinkCard = ({ url = [], fetchUrls }) => {
-  const downloadImage = () => {
-    const imageUrl = url?.qr_code;
-    const fileName = url?.title; // Desired file name for the downloaded image
-
-    // Create an anchor element
-    const anchor = document.createElement("a");
-    anchor.href = imageUrl;
-    anchor.download = fileName;
-
-    // Append the anchor to the body
-    document.body.appendChild(anchor);
-
-    // Trigger the download by simulating a click event
-    anchor.click();
-
-    // Remove the anchor from the document
-    document.body.removeChild(anchor);
-  };
-
   const { loading: loadingDelete, fn: fnDelete } = useFetch(deleteUrl, url.id);
   return (
     <div className="flex flex-col md:flex-row gap-5 border p-4 bg-gray-900 rounded-lg">
@@ -58,7 +40,7 @@ const LinkCard = ({ url = [], fetchUrls }) => {
         >
           <Copy />
         </Button>
-        <Button variant="ghost" onClick={downloadImage}>
+        <Button variant="ghost" onClick={() => downloadImage(url)}>
           <Download />
         </Button>
         <Button

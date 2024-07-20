@@ -65,6 +65,7 @@ export async function createUrl(
 }
 
 export async function deleteUrl(id) {
+  console.log("id", id);
   const { data, error } = await supabase.from("urls").delete().eq("id", id);
 
   if (error) {

@@ -30,7 +30,7 @@ function App() {
           element: <Auth />,
         },
         {
-          path: "/link/:link",
+          path: "/link/:id",
           element: (
             <RequireAuth>
               <Link />
