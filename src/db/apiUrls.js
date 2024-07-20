@@ -1,3 +1,4 @@
+import { UAParser } from "ua-parser-js";
 import supabase, { supabaseUrl } from "./supabase";
 
 export async function getUrls(user_id) {
@@ -38,7 +39,6 @@ export async function createUrl(
   const { error: storageError } = await supabase.storage
     .from("qrs")
     .upload(fileName, qrcode);
-
   if (storageError) throw new Error(storageError.message);
 
   const qr = `${supabaseUrl}/storage/v1/object/public/qrs/${fileName}`;
@@ -58,8 +58,7 @@ export async function createUrl(
     .select();
 
   if (error) {
-    console.error(error);
-    throw new Error("Error creating short URL");
+    throw new Error(error?.message ?? "Error creating short URL");
   }
 
   return data;
@@ -90,3 +89,21 @@ export async function getLongUrl(id) {
 
   return shortLinkData;
 }
+
+const parser = new UAParser();
+
+export const storeClicks = async ({ id, originalUrl }) => {
+  try {
+    const res = parser.getResult();
+    const device = res.type || "desktop";
+    const response = await fetch("https://ipapi.co/json");
+    const { city, country_name: country } = await response.json();
+    await supabase.from("clicks").insert({
+      url_id: id,
+      device,
+      city,
+      country,
+    });
+    window.location.href = originalUrl;
+  } catch (error) {}
+};

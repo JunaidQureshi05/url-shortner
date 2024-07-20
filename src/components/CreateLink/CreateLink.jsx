@@ -99,6 +99,7 @@ export function CreateLink() {
         <DialogHeader>
           <DialogTitle className="font-bold text-2xl">Create New</DialogTitle>
         </DialogHeader>
+        {error && <Error message={error?.message} />}
         {formValues?.longUrl && (
           <QRCode ref={ref} size={250} value={formValues?.longUrl} />
         )}
