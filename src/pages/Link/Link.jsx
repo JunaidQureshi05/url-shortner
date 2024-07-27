@@ -12,7 +12,7 @@ import { urlState } from "@/context";
 import { getClicksForUrl } from "@/db/apiClicks";
 import { deleteUrl, getUrl } from "@/db/apiUrls";
 import useFetch from "@/hooks/useFetch";
-import { downloadImage } from "@/utils/helpers";
+import { downloadImage, getHostName } from "@/utils/helpers";
 import { Copy, Download, LinkIcon, Trash } from "lucide-react";
 import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -63,12 +63,11 @@ const Link = () => {
             {url?.title}
           </span>
           <a
-            href={`https://url-shortner-3ryb0p159-junaidqureshi05s-projects.vercel.app/${link}`}
+            href={`${getHostName()}/${link}`}
             target="_blank"
             className="text-3xl sm:text:4xl text-blue-400 font-bold hover:underline cursor-pointer"
           >
-            https://url-shortner-3ryb0p159-junaidqureshi05s-projects.vercel.app/
-            {link}
+            {getHostName()}/{link}
           </a>
           <a
             href={url?.original_url}
@@ -86,7 +85,7 @@ const Link = () => {
               variant="ghost"
               onClick={() =>
                 navigator.clipboard.writeText(
-                  `https://trimrr.in/${url?.short_url}`
+                  `${getHostName()}/${url?.short_url}`
                 )
               }
             >

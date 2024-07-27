@@ -24,3 +24,7 @@ export const downloadImage = (url) => {
   // Remove the anchor from the document
   document.body.removeChild(anchor);
 };
+
+export const getHostName = () => {
+  return window.location.host;
+};
