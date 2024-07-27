@@ -6,6 +6,7 @@ import { deleteUrl } from "@/db/apiUrls";
 import { BeatLoader } from "react-spinners";
 import useFetch from "@/hooks/useFetch";
 import { downloadImage } from "@/utils/helpers";
+import toast, { Toaster } from "react-hot-toast";
 
 const LinkCard = ({ url = [], fetchUrls }) => {
   const { loading: loadingDelete, fn: fnDelete } = useFetch(deleteUrl, url.id);
@@ -34,9 +35,12 @@ const LinkCard = ({ url = [], fetchUrls }) => {
       <div className="flex gap-2">
         <Button
           variant="ghost"
-          onClick={() =>
-            navigator.clipboard.writeText(`https://trimrr.in/${url?.short_url}`)
-          }
+          onClick={() => {
+            navigator.clipboard.writeText(
+              `https://trimrr.in/${url?.short_url}`
+            );
+            toast.success("Link copied to clipboard!!!");
+          }}
         >
           <Copy />
         </Button>

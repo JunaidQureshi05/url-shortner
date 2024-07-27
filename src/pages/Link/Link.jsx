@@ -1,13 +1,7 @@
 import DeviceStats from "@/components/DeviceStats";
 import Location from "@/components/Location";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { urlState } from "@/context";
 import { getClicksForUrl } from "@/db/apiClicks";
 import { deleteUrl, getUrl } from "@/db/apiUrls";
@@ -15,6 +9,7 @@ import useFetch from "@/hooks/useFetch";
 import { downloadImage, getHostName } from "@/utils/helpers";
 import { Copy, Download, LinkIcon, Trash } from "lucide-react";
 import React, { useEffect } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { BarLoader, BeatLoader } from "react-spinners";
 
@@ -86,11 +81,12 @@ const Link = () => {
           <div className="flex gap-2">
             <Button
               variant="ghost"
-              onClick={() =>
+              onClick={() => {
                 navigator.clipboard.writeText(
                   `${getHostName()}/${url?.short_url}`
-                )
-              }
+                );
+                toast.success("Link copied to clipboard!!!");
+              }}
             >
               <Copy />
             </Button>
@@ -122,7 +118,7 @@ const Link = () => {
         <Card className="md:w-3/5">
           <CardHeader>
             <CardTitle className="text-2xl md:text-4xl font-extrabold">
-              Stats
+              Statistics
             </CardTitle>
           </CardHeader>
           {stats && stats.length ? (

@@ -7,6 +7,7 @@ import Link from "./pages/Link/Link";
 import RedirectionLink from "./pages/RedirectionLink/RedirectionLink";
 import UrlProvider from "./context";
 import RequireAuth from "./components/RequireAuth/RequireAuth";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const router = createBrowserRouter([
@@ -50,6 +51,7 @@ function App() {
   ]);
   return (
     <UrlProvider>
+      <Toaster />
       <RouterProvider router={router} />
     </UrlProvider>
   );
