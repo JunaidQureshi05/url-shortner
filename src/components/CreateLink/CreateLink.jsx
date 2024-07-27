@@ -7,7 +7,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "..//ui/input";
+import { Input } from "../ui/input";
 import { Card } from "../ui/card";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
@@ -21,17 +21,16 @@ import Error from "../Error/Error";
 
 export function CreateLink() {
   const { user } = urlState();
-
   const navigate = useNavigate();
   const ref = useRef();
 
-  let [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const longLink = searchParams.get("createNew");
 
   const [errors, setErrors] = useState({});
   const [formValues, setFormValues] = useState({
     title: "",
-    longUrl: longLink ? longLink : "",
+    longUrl: longLink || "",
     customUrl: "",
   });
 
@@ -97,45 +96,51 @@ export function CreateLink() {
           Create New Link
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="w-full max-w-md mx-4 sm:mx-auto">
         <DialogHeader>
-          <DialogTitle className="font-bold text-2xl">Create New</DialogTitle>
+          <DialogTitle className="text-2xl font-bold">Create New</DialogTitle>
         </DialogHeader>
         {error && <Error message={error?.message} />}
         {formValues?.longUrl && (
-          <QRCode ref={ref} size={250} value={formValues?.longUrl} />
+          <div className="flex justify-center my-4">
+            <QRCode ref={ref} size={150} value={formValues?.longUrl} />
+          </div>
         )}
-
         <Input
           id="title"
           placeholder="Short Link's Title"
           value={formValues.title}
           onChange={handleChange}
+          className="mb-2"
         />
         {errors.title && <Error message={errors.title} />}
         <Input
           id="longUrl"
-          placeholder="Enter your Loooong URL"
+          placeholder="Enter your long URL"
           value={formValues.longUrl}
           onChange={handleChange}
+          className="mb-2"
         />
         {errors.longUrl && <Error message={errors.longUrl} />}
-        <div className="flex items-center gap-2">
-          <Card className="p-2">trimrr.in</Card> /
-          <Input
-            id="customUrl"
-            placeholder="Custom Link (optional)"
-            value={formValues.customUrl}
-            onChange={handleChange}
-          />
+        <div className="flex flex-col sm:flex-row items-center gap-2 mb-4">
+          <Card className="p-2 flex-shrink-0">trimrr.in</Card>
+          <div className="flex-1">
+            <Input
+              id="customUrl"
+              placeholder="Custom Link (optional)"
+              value={formValues.customUrl}
+              onChange={handleChange}
+            />
+          </div>
         </div>
-        {error && <Error message={errors.message} />}
-        <DialogFooter className="sm:justify-start">
+        {errors.customUrl && <Error message={errors.customUrl} />}
+        <DialogFooter className="flex justify-center sm:justify-start">
           <Button
             type="button"
             variant="destructive"
             onClick={createNewLink}
             disabled={loading}
+            className="w-full sm:w-auto"
           >
             {loading ? <BeatLoader size={10} color="white" /> : "Create"}
           </Button>
