@@ -58,7 +58,6 @@ const Link = () => {
             {url?.title}
           </span>
           <a
-            href={`${getHostName()}/${url?.short_url}`}
             target="_blank"
             className="text-xl md:text-2xl text-blue-400 font-bold hover:underline cursor-pointer"
             onClick={() => {

@@ -5,6 +5,8 @@ import { useParams } from "react-router-dom";
 import { BarLoader } from "react-spinners";
 
 const RedirectionLink = () => {
+  console.log(">>>>>>INSIDE THIS PAGE");
+  debugger;
   const { id } = useParams();
   const [hasRedirected, setHasRedirected] = useState(false);
   const [longUrl, setLongUrl] = useState("");
@@ -17,14 +19,16 @@ const RedirectionLink = () => {
 
   useEffect(() => {
     // Fetch URL data
+    debugger;
     fn();
-  }, [id, fn]);
+  }, []);
 
   useEffect(() => {
-    // Store click when data is available and not redirected yet
+    // Store click when data is available and not redirected yet\
+    debugger;
     if (data && !hasRedirected) {
-      setLongUrl(data.original_url);
       fnStoreClick();
+      setLongUrl(data.original_url);
       setHasRedirected(true);
     }
   }, [data]);

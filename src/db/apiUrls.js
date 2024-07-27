@@ -94,10 +94,12 @@ const parser = new UAParser();
 
 export const storeClicks = async ({ id, originalUrl }) => {
   try {
+    debugger;
     const res = parser.getResult();
     const device = res.type || "desktop";
     const response = await fetch("https://ipapi.co/json");
     const { city, country_name: country } = await response.json();
+    debugger;
     await supabase.from("clicks").insert({
       url_id: id,
       device,
