@@ -107,7 +107,6 @@ export const storeClicks = async ({ id, originalUrl }) => {
       city,
       country,
     });
-    console.log(">>>>>>City ", city);
-    // window.location.href = originalUrl;
+    window.location.href = originalUrl;
   } catch (error) {}
 };

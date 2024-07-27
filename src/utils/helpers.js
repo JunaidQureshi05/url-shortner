@@ -26,5 +26,5 @@ export const downloadImage = (url) => {
 };
 
 export const getHostName = () => {
-  return window.location.host;
+  return window?.location?.host;
 };

@@ -14,7 +14,6 @@ const RedirectionLink = () => {
 
   useEffect(() => {
     if (!loading && data) {
-      debugger;
       fnStoreClick();
     }
   }, [loading]);

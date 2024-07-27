@@ -52,6 +52,9 @@ const Link = () => {
     }
   }, [error]);
   let link = url?.custom_url ?? url?.short_url;
+
+  console.log(">>>>>", getHostName(), link);
+
   return (
     <>
       {(loading || loadingStats) && (
@@ -63,9 +66,12 @@ const Link = () => {
             {url?.title}
           </span>
           <a
-            href={`${getHostName()}/${link}`}
+            // href={`${getHostName()}/${link}`}
             target="_blank"
             className="text-3xl sm:text:4xl text-blue-400 font-bold hover:underline cursor-pointer"
+            onClick={() => {
+              window.open(`${getHostName()}/${link}`, "_blank");
+            }}
           >
             {getHostName()}/{link}
           </a>
