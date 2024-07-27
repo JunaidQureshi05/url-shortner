@@ -40,11 +40,7 @@ function App() {
         },
         {
           path: "/:id",
-          element: (
-            <RequireAuth>
-              <RedirectionLink />
-            </RequireAuth>
-          ),
+          element: <RedirectionLink />,
         },
       ],
     },

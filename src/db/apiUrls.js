@@ -65,7 +65,6 @@ export async function createUrl(
 }
 
 export async function deleteUrl(id) {
-  console.log("id", id);
   const { data, error } = await supabase.from("urls").delete().eq("id", id);
 
   if (error) {
@@ -96,8 +95,6 @@ const parser = new UAParser();
 export const storeClicks = async ({ id, originalUrl }) => {
   try {
     const res = parser.getResult();
-    console.log(res);
-    debugger;
     const device = res.type || "desktop";
     const response = await fetch("https://ipapi.co/json");
     const { city, country_name: country } = await response.json();
