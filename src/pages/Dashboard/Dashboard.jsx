@@ -35,7 +35,9 @@ export const Dashboard = () => {
   );
 
   useEffect(() => {
-    if (urls?.length) fnClicks();
+    if (urls && urls.length > 0) {
+      fnClicks();
+    }
   }, [urls?.length]);
 
   return (
