@@ -1,5 +1,13 @@
 import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { urlState } from "@/context";
+import { getClicksForUrl } from "@/db/apiClicks";
 import { deleteUrl, getUrl } from "@/db/apiUrls";
 import useFetch from "@/hooks/useFetch";
 import { downloadImage } from "@/utils/helpers";
@@ -23,9 +31,9 @@ const Link = () => {
     data: stats,
     fn: fnStats,
     error: errStats,
-  } = useFetch(getUrl, { id, user_id: user?.id });
+  } = useFetch(getClicksForUrl, id);
 
-  console.log(">>>>>>id", id);
+  console.log(">>>>>>stats", stats);
 
   const { loading: loadingDelete, fn: fnDelete } = useFetch(deleteUrl, id, {
     user_id: user?.id,
@@ -57,7 +65,7 @@ const Link = () => {
             target="_blank"
             className="text-3xl sm:text:4xl text-blue-400 font-bold hover:underline cursor-pointer"
           >
-            https://trimmr.in/${link}
+            https://trimmr.in/{link}
           </a>
           <a
             href={url?.original_url}
@@ -106,7 +114,24 @@ const Link = () => {
             alt="qr code"
           />
         </div>
-        <div className="sm:w-3/5"></div>
+
+        <Card className="sm:w-3/5">
+          <CardHeader>
+            <CardTitle>Card Title</CardTitle>
+            <CardDescription>Card Description</CardDescription>
+          </CardHeader>
+          {stats && stats.length ? (
+            <CardContent>
+              <p>Card Content</p>
+            </CardContent>
+          ) : (
+            <CardContent>
+              {loadingStats === false
+                ? "No Statistics yet"
+                : "Loading Statistics..."}
+            </CardContent>
+          )}
+        </Card>
       </div>
     </>
   );
