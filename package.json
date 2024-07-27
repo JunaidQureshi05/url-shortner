@@ -28,6 +28,7 @@
     "react-qrcode-logo": "^3.0.0",
     "react-router-dom": "^6.24.1",
     "react-spinners": "^0.14.1",
+    "recharts": "^2.12.7",
     "shadcn-ui": "^0.8.0",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",

@@ -1,3 +1,5 @@
+import DeviceStats from "@/components/DeviceStats";
+import Location from "@/components/Location";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -61,11 +63,12 @@ const Link = () => {
             {url?.title}
           </span>
           <a
-            href={`https://trimmr.in/${link}`}
+            href={`https://url-shortner-3ryb0p159-junaidqureshi05s-projects.vercel.app/${link}`}
             target="_blank"
             className="text-3xl sm:text:4xl text-blue-400 font-bold hover:underline cursor-pointer"
           >
-            https://trimmr.in/{link}
+            https://url-shortner-3ryb0p159-junaidqureshi05s-projects.vercel.app/
+            {link}
           </a>
           <a
             href={url?.original_url}
@@ -114,21 +117,31 @@ const Link = () => {
             alt="qr code"
           />
         </div>
-
         <Card className="sm:w-3/5">
           <CardHeader>
-            <CardTitle>Card Title</CardTitle>
-            <CardDescription>Card Description</CardDescription>
+            <CardTitle className="text-4xl font-extrabold">Stats</CardTitle>
           </CardHeader>
           {stats && stats.length ? (
-            <CardContent>
-              <p>Card Content</p>
+            <CardContent className="flex flex-col gap-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Total Clicks</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p>{stats?.length}</p>
+                </CardContent>
+              </Card>
+
+              <CardTitle>Location Data</CardTitle>
+              <Location stats={stats} />
+              <CardTitle>Device Info</CardTitle>
+              <DeviceStats stats={stats} />
             </CardContent>
           ) : (
             <CardContent>
               {loadingStats === false
                 ? "No Statistics yet"
-                : "Loading Statistics..."}
+                : "Loading Statistics.."}
             </CardContent>
           )}
         </Card>

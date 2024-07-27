@@ -96,6 +96,8 @@ const parser = new UAParser();
 export const storeClicks = async ({ id, originalUrl }) => {
   try {
     const res = parser.getResult();
+    console.log(res);
+    debugger;
     const device = res.type || "desktop";
     const response = await fetch("https://ipapi.co/json");
     const { city, country_name: country } = await response.json();
@@ -105,6 +107,7 @@ export const storeClicks = async ({ id, originalUrl }) => {
       city,
       country,
     });
-    window.location.href = originalUrl;
+    console.log(">>>>>>City ", city);
+    // window.location.href = originalUrl;
   } catch (error) {}
 };

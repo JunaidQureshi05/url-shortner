@@ -7,14 +7,15 @@ import { BarLoader } from "react-spinners";
 const RedirectionLink = () => {
   const { id } = useParams();
   const { loading, data, fn } = useFetch(getLongUrl, id);
-  const { loading: loadingStats, fn: fnStats } = useFetch(storeClicks, {
+  const { loading: loadingStats, fn: fnStoreClick } = useFetch(storeClicks, {
     id: data?.id,
     originalUrl: data?.original_url,
   });
 
   useEffect(() => {
     if (!loading && data) {
-      fnStats();
+      debugger;
+      fnStoreClick();
     }
   }, [loading]);
 
