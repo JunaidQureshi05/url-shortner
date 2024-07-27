@@ -10,13 +10,13 @@ import { downloadImage } from "@/utils/helpers";
 const LinkCard = ({ url = [], fetchUrls }) => {
   const { loading: loadingDelete, fn: fnDelete } = useFetch(deleteUrl, url.id);
   return (
-    <div className="flex flex-col md:flex-row gap-5 border p-4 bg-gray-900 rounded-lg">
+    <div className="flex flex-col md:flex-row gap-8 border p-4 bg-gray-900 rounded-lg">
       <img
         src={url?.qr_code}
         className="h-32 object-contain ring ring-blue-500 self-start"
         alt="qr code"
       />
-      <Link to={`/link/${url?.id}`} className="flex flex-col flex-1">
+      <Link to={`/link/${url?.id}`} className="flex flex-col flex-1 gap-2">
         <span className="text-3xl font-extrabold hover:underline cursor-pointer">
           {url?.title}
         </span>

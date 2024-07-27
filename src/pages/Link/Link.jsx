@@ -35,8 +35,6 @@ const Link = () => {
     error: errStats,
   } = useFetch(getClicksForUrl, id);
 
-  console.log(">>>>>>stats", stats);
-
   const { loading: loadingDelete, fn: fnDelete } = useFetch(deleteUrl, id, {
     user_id: user?.id,
   });
@@ -51,24 +49,23 @@ const Link = () => {
       navigate("/dashboard");
     }
   }, [error]);
-  let link = url?.custom_url ?? url?.short_url;
 
-  console.log(">>>>>", getHostName(), link);
+  let link = url?.custom_url ?? url?.short_url;
 
   return (
     <>
       {(loading || loadingStats) && (
         <BarLoader className="mb-4" width={"100%"} color="#36d7b7" />
       )}
-      <div className="flex flex-row gap-8 sm:flex-row justify-between">
-        <div className="flex flex-col items-start gap-8 rounded-lg sm:w-2/5">
-          <span className="text-6xl font-extrabold hover:underline cursor-pointer">
+      <div className="flex flex-col gap-6 md:gap-8 md:flex-row">
+        <div className="flex flex-col items-start gap-6 md:gap-8 md:w-2/5">
+          <span className="text-3xl md:text-5xl font-extrabold hover:underline cursor-pointer">
             {url?.title}
           </span>
           <a
             href={`${getHostName()}/${url?.short_url}`}
             target="_blank"
-            className="text-3xl sm:text:4xl text-blue-400 font-bold hover:underline cursor-pointer"
+            className="text-xl md:text-2xl text-blue-400 font-bold hover:underline cursor-pointer"
             onClick={() => {
               window.open(`${getHostName()}/${link}`, "_blank");
             }}
@@ -78,12 +75,12 @@ const Link = () => {
           <a
             href={url?.original_url}
             target="_blank"
-            className="flex items-center gap-1 hover-underline cursor-pointer"
+            className="flex items-center gap-1 text-sm md:text-lg hover:underline cursor-pointer"
           >
             <LinkIcon className="p-1" />
             {url?.original_url}
           </a>
-          <span className="flex items-end font-extralight text-sm">
+          <span className="text-xs md:text-sm font-extralight">
             {new Date(url?.created_at).toLocaleString()}
           </span>
           <div className="flex gap-2">
@@ -118,16 +115,18 @@ const Link = () => {
           </div>
           <img
             src={url?.qr_code}
-            className="w-full self-center sm:self-start ring ring-blue-500 p-1 object-contain"
+            className="w-full max-w-xs md:max-w-sm self-center md:self-start ring ring-blue-500 p-1 object-contain"
             alt="qr code"
           />
         </div>
-        <Card className="sm:w-3/5">
+        <Card className="md:w-3/5">
           <CardHeader>
-            <CardTitle className="text-4xl font-extrabold">Stats</CardTitle>
+            <CardTitle className="text-2xl md:text-4xl font-extrabold">
+              Stats
+            </CardTitle>
           </CardHeader>
           {stats && stats.length ? (
-            <CardContent className="flex flex-col gap-6">
+            <CardContent className="flex flex-col gap-4 md:gap-6">
               <Card>
                 <CardHeader>
                   <CardTitle>Total Clicks</CardTitle>

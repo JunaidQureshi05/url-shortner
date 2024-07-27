@@ -39,46 +39,53 @@ export const Dashboard = () => {
   }, [urls?.length]);
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-6 md:gap-8 px-4 md:px-8">
       {(loading || loadingClicks) && (
         <BarLoader width={"100%"} color="#36d7b7" />
       )}
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
         <Card>
           <CardHeader>
-            <CardTitle>Links Created</CardTitle>
+            <CardTitle className="text-lg md:text-xl">Links Created</CardTitle>
           </CardHeader>
           <CardContent>
-            <p>{urls?.length}</p>
+            <p className="text-lg md:text-xl">{urls?.length}</p>
           </CardContent>
         </Card>
         <Card>
           <CardHeader>
-            <CardTitle>Total Clicks</CardTitle>
+            <CardTitle className="text-lg md:text-xl">Total Clicks</CardTitle>
           </CardHeader>
           <CardContent>
-            <p>{clicks?.length}</p>
+            <p className="text-lg md:text-xl">{clicks?.length}</p>
           </CardContent>
         </Card>
       </div>
-      <div className="flex justify-between">
-        <h1 className="text-4xl font-extrabold">My Links</h1>
+
+      <div className="flex flex-col md:flex-row justify-between items-center mb-6">
+        <h1 className="text-3xl md:text-4xl font-extrabold">My Links</h1>
         <CreateLink />
       </div>
-      <div className="relative">
+
+      <div className="relative mb-6">
         <Input
           type="text"
           placeholder="Filter Links..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
+          className="w-full"
         />
-        <Filter className="absolute top-2 right-2 p-1" />
+        <Filter className="absolute top-3 right-3 text-gray-500" />
       </div>
+
       {error && <Error message={error?.message} />}
-      {(filteredUrls || []).map((url, i) => (
-        <LinkCard key={i} url={url} fetchUrls={fnUrls} />
-      ))}
+
+      <div className="flex flex-col gap-4">
+        {(filteredUrls || []).map((url, i) => (
+          <LinkCard key={i} url={url} fetchUrls={fnUrls} />
+        ))}
+      </div>
     </div>
   );
 };

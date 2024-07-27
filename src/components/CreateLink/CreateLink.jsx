@@ -93,7 +93,9 @@ export function CreateLink() {
       }}
     >
       <DialogTrigger asChild>
-        <Button variant="destructive">Create New Link</Button>
+        <Button variant="destructive" className="mt-4 md:mt-0">
+          Create New Link
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
